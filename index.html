@@ -108,8 +108,8 @@
               <div class="card-body">
                 <p>Badlands Labs proxies to both OpenAI and Anthropic APIs through a single unified endpoint:</p>
                 <ul class="styled-list mt-16">
-                  <li><strong>OpenAI-compatible:</strong> <code>https://api.badlandslabs.io/v1</code></li>
-                  <li><strong>Anthropic-compatible:</strong> <code>https://api.badlandslabs.io/anthropic/v1</code></li>
+                  <li><strong>OpenAI-compatible:</strong> <code>https://api.badlandslabs.com/v1</code></li>
+                  <li><strong>Anthropic-compatible:</strong> <code>https://api.badlandslabs.com/anthropic/v1</code></li>
                 </ul>
               </div>
             </div>
@@ -141,7 +141,7 @@
             </div>
             <div class="code-content">
 <pre># Chat Completions
-curl https://api.badlandslabs.io/v1/chat/completions \
+curl https://api.badlandslabs.com/v1/chat/completions \
   -H "Authorization: Bearer sk-bdl-api03-your-key-here" \
   -H "Content-Type: application/json" \
   -d '{
@@ -166,7 +166,7 @@ curl https://api.badlandslabs.io/v1/chat/completions \
             </div>
             <div class="code-content">
 <pre># Embeddings
-curl https://api.badlandslabs.io/v1/embeddings \
+curl https://api.badlandslabs.com/v1/embeddings \
   -H "Authorization: Bearer sk-bdl-api03-your-key-here" \
   -H "Content-Type: application/json" \
   -d '{
@@ -192,7 +192,7 @@ curl https://api.badlandslabs.io/v1/embeddings \
             </div>
             <div class="code-content">
 <pre># Claude Messages API
-curl https://api.badlandslabs.io/anthropic/v1/messages \
+curl https://api.badlandslabs.com/anthropic/v1/messages \
   -H "Authorization: Bearer sk-bdl-api03-your-key-here" \
   -H "Content-Type: application/json" \
   -H "x-api-key: sk-bdl-api03-your-key-here" \
@@ -220,7 +220,7 @@ curl https://api.badlandslabs.io/anthropic/v1/messages \
             </div>
             <div class="code-content">
 <pre># Direct local proxy (port 8080)
-curl http://localhost:8080/anthropic/v1/messages \
+curl https://api.badlandslabs.com/anthropic/v1/messages \
   -H "Authorization: Bearer sk-bdl-api03-your-key-here" \
   -H "Content-Type: application/json" \
   -H "anthropic-version: 2023-06-01" \
@@ -254,7 +254,7 @@ curl http://localhost:8080/anthropic/v1/messages \
 
 client = OpenAI(
   api_key="sk-bdl-api03-your-key-here",
-  base_url="https://api.badlandslabs.io/v1"
+  base_url="https://api.badlandslabs.com/v1"
 )
 
 response = client.chat.completions.create(
@@ -283,7 +283,7 @@ response = client.chat.completions.create(
 
 client = anthropic.Anthropic(
   api_key="sk-bdl-api03-your-key-here",
-  base_url="https://api.badlandslabs.io/anthropic/v1"
+  base_url="https://api.badlandslabs.com/anthropic/v1"
 )
 
 message = client.messages.create(

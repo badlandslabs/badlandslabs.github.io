@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Badlands Labs - Secure API proxy infrastructure with unified access to OpenAI and Anthropic endpoints">
+  <title>Badlands Labs - Secure API Proxy</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        <div class="brand">
+          <div class="brand-logo">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="currentColor"/>
+              <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <span class="brand-name">Badlands<em>Labs</em></span>
+        </div>
+        <nav class="header-nav">
+          <a href="#docs" class="active">Docs</a>
+          <a href="#status">Status</a>
+          <a href="#support">Support</a>
+          <a href="#privacy">Privacy</a>
+          <a href="#terms">Terms</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow hero-eyebrow">API Infrastructure</p>
+      <h1 class="hero-title">Badlands<em>Labs</em></h1>
+      <p class="hero-subtitle">
+        Secure API proxy infrastructure with unified access to OpenAI and Anthropic endpoints.
+        Single API key. Real-time analytics. Enterprise-grade reliability.
+      </p>
+      <div class="hero-cta">
+        <button class="btn btn-primary" onclick="navigateToTab('docs')">
+          <span>Get Started</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </button>
+        <button class="btn btn-secondary" onclick="navigateToTab('status')">
+          <span>View Status</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tab Section -->
+  <section class="tab-section">
+    <div class="container">
+      <!-- Tab Navigation -->
+      <nav class="tab-nav" role="tablist">
+        <button class="tab-btn active" data-tab="docs" role="tab" aria-selected="true">Docs</button>
+        <button class="tab-btn" data-tab="status" role="tab">Status</button>
+        <button class="tab-btn" data-tab="support" role="tab">Support</button>
+        <button class="tab-btn" data-tab="privacy" role="tab">Privacy</button>
+        <button class="tab-btn" data-tab="terms" role="tab">Terms</button>
+      </nav>
+
+      <!-- Tab Panels -->
+      <div class="tab-panels">
+
+        <!-- Docs Panel -->
+        <div class="tab-panel active" id="docs" role="tabpanel">
+          <div class="section-header">
+            <p class="eyebrow">Documentation</p>
+            <h2 class="section-title">Quick Start Guide</h2>
+            <p class="section-desc">Get up and running with Badlands Labs API proxy in minutes</p>
+          </div>
+
+          <div class="card-grid">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-icon">1</div>
+                <h3 class="card-title">Get Your API Key</h3>
+              </div>
+              <div class="card-body">
+                <p>Register for a Badlands Labs account and generate your API key. Keys follow the format:</p>
+                <p style="margin-top: 12px;"><code>sk-bdl-api03-xxxxxxxxxxxx</code></p>
+                <p style="margin-top: 12px; font-size: 0.8125rem;">All keys are prefixed with <code>sk-bdl-api03-</code> for easy identification.</p>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div class="card-icon">2</div>
+                <h3 class="card-title">Choose Your Endpoint</h3>
+              </div>
+              <div class="card-body">
+                <p>Badlands Labs proxies to both OpenAI and Anthropic APIs through a single unified endpoint:</p>
+                <ul class="styled-list mt-16">
+                  <li><strong>OpenAI-compatible:</strong> <code>https://api.badlandslabs.io/v1</code></li>
+                  <li><strong>Anthropic-compatible:</strong> <code>https://api.badlandslabs.io/anthropic/v1</code></li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div class="card-icon">3</div>
+                <h3 class="card-title">Start Building</h3>
+              </div>
+              <div class="card-body">
+                <p>Use your Badlands Labs API key as the bearer token. The proxy handles routing, rate limiting, and analytics automatically.</p>
+              </div>
+            </div>
+          </div>
+
+          <h3 style="font-family: var(--font-display); font-size: 1.5rem; margin: 32px 0 16px;">OpenAI API Calls</h3>
+          <p class="text-muted mb-16">Point your OpenAI SDK or curl calls to our unified endpoint:</p>
+
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-lang">bash</span>
+              <button class="copy-btn" onclick="copyCode(this)">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span>Copy</span>
+              </button>
+            </div>
+            <div class="code-content">
+<pre># Chat Completions
+curl https://api.badlandslabs.io/v1/chat/completions \
+  -H "Authorization: Bearer sk-bdl-api03-your-key-here" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "gpt-4o",
+    "messages": [
+      {"role": "user", "content": "Hello, world!"}
+    ]
+  }'</pre>
+            </div>
+          </div>
+
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-lang">bash</span>
+              <button class="copy-btn" onclick="copyCode(this)">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span>Copy</span>
+              </button>
+            </div>
+            <div class="code-content">
+<pre># Embeddings
+curl https://api.badlandslabs.io/v1/embeddings \
+  -H "Authorization: Bearer sk-bdl-api03-your-key-here" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "text-embedding-3-small",
+    "input": "The quick brown fox jumps over the lazy dog"
+  }'</pre>
+            </div>
+          </div>
+
+          <h3 style="font-family: var(--font-display); font-size: 1.5rem; margin: 40px 0 16px;">Anthropic API Calls</h3>
+          <p class="text-muted mb-16">Access Claude models through our Anthropic-compatible endpoint on port 8080:</p>
+
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-lang">bash</span>
+              <button class="copy-btn" onclick="copyCode(this)">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span>Copy</span>
+              </button>
+            </div>
+            <div class="code-content">
+<pre># Claude Messages API
+curl https://api.badlandslabs.io/anthropic/v1/messages \
+  -H "Authorization: Bearer sk-bdl-api03-your-key-here" \
+  -H "Content-Type: application/json" \
+  -H "x-api-key: sk-bdl-api03-your-key-here" \
+  -H "anthropic-version: 2023-06-01" \
+  -d '{
+    "model": "claude-sonnet-4-20250514",
+    "max_tokens": 1024,
+    "messages": [
+      {"role": "user", "content": "Hello, Claude!"}
+    ]
+  }'</pre>
+            </div>
+          </div>
+
+          <div class="code-block">
+            <div class="code-header">
+              <span class="code-lang">bash</span>
+              <button class="copy-btn" onclick="copyCode(this)">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span>Copy</span>
+              </button>
+            </div>
+            <div class="code-content">
+<pre># Direct local proxy (port 8080)
+curl http://localhost:8080/anthropic/v1/messages \
+  -H "Authorization: Bearer sk-bdl-api03-your-key-here" \
+  -H "Content-Type: application/json" \
+  -H "anthropic-version: 2023-06-01" \
+  -d '{
+    "model": "claude-sonnet-4-20250514",
+    "max_tokens": 1024,
+    "messages": [
+      {"role": "user", "content": "Hello via local proxy!"}
+    ]
+  }'</pre>
+            </div>
+          </div>
+
+          <h3 style="font-family: var(--font-display); font-size: 1.5rem; margin: 40px 0 16px;">SDK Configuration</h3>
+
+          <div class="card" style="margin-bottom: 20px;">
+            <h4 style="font-family: var(--font-display); margin-bottom: 12px;">OpenAI Python SDK</h4>
+            <div class="code-block" style="margin: 16px 0 0;">
+              <div class="code-header">
+                <span class="code-lang">python</span>
+                <button class="copy-btn" onclick="copyCode(this)">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                  <span>Copy</span>
+                </button>
+              </div>
+              <div class="code-content">
+<pre>from openai import OpenAI
+
+client = OpenAI(
+  api_key="sk-bdl-api03-your-key-here",
+  base_url="https://api.badlandslabs.io/v1"
+)
+
+response = client.chat.completions.create(
+  model="gpt-4o",
+  messages=[{"role": "user", "content": "Hello!"}]
+)</pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h4 style="font-family: var(--font-display); margin-bottom: 12px;">Anthropic Python SDK</h4>
+            <div class="code-block" style="margin: 16px 0 0;">
+              <div class="code-header">
+                <span class="code-lang">python</span>
+                <button class="copy-btn" onclick="copyCode(this)">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                  <span>Copy</span>
+                </button>
+              </div>
+              <div class="code-content">
+<pre>import anthropic
+
+client = anthropic.Anthropic(
+  api_key="sk-bdl-api03-your-key-here",
+  base_url="https://api.badlandslabs.io/anthropic/v1"
+)
+
+message = client.messages.create(
+  model="claude-sonnet-4-20250514",
+  max_tokens=1024,
+  messages=[{"role": "user", "content": "Hello!"}]
+)</pre>
+              </div>
+            </div>
+          </div>
+
+          <h3 style="font-family: var(--font-display); font-size: 1.5rem; margin: 40px 0 24px;">Key Formatting Guide</h3>
+
+          <div class="card">
+            <h4 style="font-family: var(--font-display); margin-bottom: 16px;">API Key Structure</h4>
+            <p>All Badlands Labs API keys follow a consistent format for easy identification:</p>
+            <ul class="styled-list mt-16">
+              <li><strong>Prefix:</strong> <code>sk-bdl-api03-</code> — identifies the key as a Badlands Labs key</li>
+              <li><strong>Key ID:</strong> 24 character alphanumeric string — unique to each user account</li>
+              <li><strong>Example:</strong> <code>sk-bdl-api03-a1b2c3d4e5f6g7h8i9j0k1l2m</code></li>
+            </ul>
+            <div style="margin-top: 20px; padding: 16px; background: var(--bg-cream); border-radius: var(--radius-sm); border-left: 3px solid var(--gold-accent);">
+              <p style="margin: 0; font-size: 0.875rem;"><strong>Security Note:</strong> Never share your API key. Treat it like a password and keep it confidential. If compromised, rotate immediately from your dashboard.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Status Panel -->
+        <div class="tab-panel" id="status" role="tabpanel">
+          <div class="section-header">
+            <p class="eyebrow">System Health</p>
+            <h2 class="section-title">Operational Status</h2>
+            <p class="section-desc">Real-time and historical performance metrics</p>
+          </div>
+
+          <div class="status-grid">
+            <div class="status-card">
+              <span class="status-indicator operational"></span>
+              <span class="text-muted" style="font-size: 0.875rem;">API Gateway</span>
+              <div class="status-value">Operational</div>
+              <div class="status-label">All systems nominal</div>
+            </div>
+
+            <div class="status-card">
+              <span class="status-indicator operational"></span>
+              <span class="text-muted" style="font-size: 0.875rem;">OpenAI Proxy</span>
+              <div class="status-value">Operational</div>
+              <div class="status-label">Processing requests</div>
+            </div>
+
+            <div class="status-card">
+              <span class="status-indicator operational"></span>
+              <span class="text-muted" style="font-size: 0.875rem;">Anthropic Proxy</span>
+              <div class="status-value">Operational</div>
+              <div class="status-label">Processing requests</div>
+            </div>
+          </div>
+
+          <div class="status-grid">
+            <div class="status-card">
+              <div class="status-value" id="uptime-value">99.97%</div>
+              <div class="status-label">90-Day Uptime</div>
+            </div>
+
+            <div class="status-card">
+              <span class="status-indicator operational"></span>
+              <div class="status-value" style="font-size: 1.5rem;">Database</div>
+              <div class="status-label">Connected</div>
+            </div>
+
+            <div class="status-card">
+              <div class="status-value" id="requests-count">2.4M</div>
+              <div class="status-label">Requests Today</div>
+            </div>
+          </div>
+
+          <div class="uptime-chart">
+            <div class="chart-header">
+              <h4 class="chart-title">Daily Uptime — Past 90 Days</h4>
+              <div class="chart-legend">
+                <span><span class="legend-dot" style="background: var(--success-green);"></span>Operational</span>
+                <span><span class="legend-dot" style="background: var(--warning-amber);"></span>Degraded</span>
+                <span><span class="legend-dot" style="background: var(--error-red);"></span>Outage</span>
+              </div>
+            </div>
+            <div class="bars-container" id="uptime-bars">
+              <!-- Bars generated by JavaScript -->
+            </div>
+            <div class="chart-labels">
+              <span>90 days ago</span>
+              <span>60 days ago</span>
+              <span>30 days ago</span>
+              <span>Today</span>
+            </div>
+          </div>
+
+          <h4 style="font-family: var(--font-display); font-size: 1.25rem; margin-bottom: 16px;">Response Latency</h4>
+          <div class="latency-grid">
+            <div class="latency-item">
+              <div class="latency-value" id="latency-p50">42ms</div>
+              <div class="latency-label">P50</div>
+            </div>
+            <div class="latency-item">
+              <div class="latency-value" id="latency-p95">118ms</div>
+              <div class="latency-label">P95</div>
+            </div>
+            <div class="latency-item">
+              <div class="latency-value" id="latency-p99">187ms</div>
+              <div class="latency-label">P99</div>
+            </div>
+            <div class="latency-item">
+              <div class="latency-value" id="latency-avg">67ms</div>
+              <div class="latency-label">Average</div>
+            </div>
+          </div>
+
+          <h4 style="font-family: var(--font-display); font-size: 1.25rem; margin: 32px 0 16px;">Incident History</h4>
+
+          <div class="card" style="margin-bottom: 16px;">
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+              <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--success-green);"></span>
+              <strong style="color: var(--ink-dark);">May 15, 2026 — Scheduled Maintenance (Resolved)</strong>
+            </div>
+            <p style="margin: 0; font-size: 0.875rem;">Completed database migration from 01:00-03:00 UTC. All systems operational. No user impact.</p>
+          </div>
+
+          <div class="card" style="margin-bottom: 16px;">
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+              <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--success-green);"></span>
+              <strong style="color: var(--ink-dark);">April 28, 2026 — Rate Limit Adjustment (Resolved)</strong>
+            </div>
+            <p style="margin: 0; font-size: 0.875rem;">Increased rate limits for Pro tier users. Processing capacity expanded by 40%.</p>
+          </div>
+
+          <div class="card">
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+              <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--success-green);"></span>
+              <strong style="color: var(--ink-dark);">March 10, 2026 — CDN Optimization (Resolved)</strong>
+            </div>
+            <p style="margin: 0; font-size: 0.875rem;">Deployed edge caching improvements. Average latency reduced by 23% for US-based requests.</p>
+          </div>
+        </div>
+
+        <!-- Support Panel -->
+        <div class="tab-panel" id="support" role="tabpanel">
+          <div class="section-header">
+            <p class="eyebrow">Get Help</p>
+            <h2 class="section-title">Support Center</h2>
+            <p class="section-desc">We're here to help. Reach out anytime.</p>
+          </div>
+
+          <div class="card-grid">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold-accent)" stroke-width="2">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                  </svg>
+                </div>
+                <h3 class="card-title">Email Support</h3>
+              </div>
+              <div class="card-body">
+                <p>For general inquiries, technical questions, or partnership opportunities:</p>
+                <p style="margin-top: 12px;">
+                  <a href="mailto:support@badlandslabs.io" style="font-size: 1.125rem; font-weight: 600;">support@badlandslabs.io</a>
+                </p>
+                <p style="margin-top: 8px; font-size: 0.8125rem; color: var(--text-light);">Typical response time: 1-2 business days</p>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div class="card-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold-accent)" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M12 6v6l4 2"></path>
+                  </svg>
+                </div>
+                <h3 class="card-title">Priority Support</h3>
+              </div>
+              <div class="card-body">
+                <p>Enterprise customers with critical infrastructure needs can reach our on-call team:</p>
+                <p style="margin-top: 12px;">
+                  <a href="mailto:enterprise@badlandslabs.io" style="font-size: 1.125rem; font-weight: 600;">enterprise@badlandslabs.io</a>
+                </p>
+                <p style="margin-top: 8px; font-size: 0.8125rem; color: var(--text-light);">24/7 emergency escalation available</p>
+              </div>
+            </div>
+          </div>
+
+          <h3 style="font-family: var(--font-display); font-size: 1.5rem; margin: 40px 0 24px;">Send a Message</h3>
+
+          <form id="support-form" class="card" style="max-width: 640px;" onsubmit="handleFormSubmit(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="name">Name</label>
+                <input type="text" id="name" name="name" class="form-input" placeholder="Your name" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="email">Email</label>
+                <input type="email" id="email" name="email" class="form-input" placeholder="you@company.com" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" class="form-input" placeholder="How can we help?" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="message">Message</label>
+              <textarea id="message" name="message" class="form-textarea" placeholder="Describe your issue or question in detail..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;">
+              <span>Send Message</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </button>
+          </form>
+
+          <div id="form-success" class="card" style="max-width: 640px; display: none; border-color: var(--success-green);">
+            <div class="d-flex align-center gap-12">
+              <div style="width: 44px; height: 44px; background: var(--success-green); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+              </div>
+              <div>
+                <h4 style="font-family: var(--font-body); font-size: 1rem; margin-bottom: 4px;">Message Sent!</h4>
+                <p style="margin: 0; font-size: 0.875rem;">We'll get back to you within 1-2 business days.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Privacy Panel -->
+        <div class="tab-panel" id="privacy" role="tabpanel">
+          <div class="section-header">
+            <p class="eyebrow">Legal</p>
+            <h2 class="section-title">Privacy Policy</h2>
+            <p class="section-desc">Last updated: May 15, 2026</p>
+          </div>
+
+          <div class="legal-content">
+            <h3>Information We Collect</h3>
+            <p>When you use Badlands Labs, we collect information necessary to provide and improve our services. This includes:</p>
+            <ul>
+              <li><strong>Account Information:</strong> Email address, name, and account credentials when you register</li>
+              <li><strong>Usage Data:</strong> API request metadata including timestamps, endpoint paths, model names, and request sizes</li>
+              <li><strong>Usage Analytics:</strong> Aggregated metrics on request volumes, latency distributions, and error rates per user</li>
+              <li><strong>Log Data:</strong> Server-side logs containing request headers (excluding API key content), IP addresses, and response codes</li>
+            </ul>
+
+            <h3>How We Use Your Information</h3>
+            <p>We use collected information for the following purposes:</p>
+            <ul>
+              <li>Providing, maintaining, and improving our API proxy services</li>
+              <li>Processing API requests through our infrastructure to OpenAI and Anthropic endpoints</li>
+              <li>Generating usage dashboards and analytics for your account</li>
+              <li>Communicating about service updates, security notices, and billing</li>
+              <li>Detecting, preventing, and addressing technical issues and abuse</li>
+            </ul>
+
+            <h3>Proxy Processing and Data Handling</h3>
+            <p>Badlands Labs operates as an API proxy service. When you send requests through our infrastructure:</p>
+            <ul>
+              <li>Your API requests are routed through our servers to the target AI provider (OpenAI or Anthropic)</li>
+              <li><strong>We do not store the content of your prompts or completions</strong> beyond what is required for brief operational buffering</li>
+              <li><strong>Request/response bodies are not persisted to disk</strong> in our infrastructure</li>
+              <li>Your API key is validated against our database and then passed through to the target provider</li>
+              <li>All traffic is encrypted in transit using TLS 1.2 or higher</li>
+            </ul>
+
+            <h3>Data Retention</h3>
+            <p>We retain different types of data for different periods:</p>
+            <ul>
+              <li><strong>Account Data:</strong> Retained for the duration of your account plus 90 days after deletion</li>
+              <li><strong>Usage Logs:</strong> Aggregated statistics retained for 13 months for billing and analytics purposes</li>
+              <li><strong>Operational Logs:</strong> Server logs retained for 30 days for debugging and security purposes</li>
+              <li><strong>API Request Metadata:</strong> Path, timestamp, and status code retained for 90 days; full headers excluded after validation</li>
+            </ul>
+
+            <h3>Data Security</h3>
+            <p>We implement industry-standard security measures to protect your data:</p>
+            <ul>
+              <li>All data encrypted in transit using AES-256 or TLS 1.2+</li>
+              <li>API keys hashed using bcrypt before storage</li>
+              <li>Access logs maintained with immutable storage for audit trails</li>
+              <li>Regular third-party security audits conducted quarterly</li>
+              <li>Infrastructure hosted in SOC 2 Type II compliant data centers</li>
+            </ul>
+
+            <h3>Information Sharing</h3>
+            <p>We do not sell, trade, or otherwise transfer your personal information to outside parties, except:</p>
+            <ul>
+              <li><strong>AI Providers:</strong> Your request content is shared with OpenAI or Anthropic as necessary to fulfill your API requests</li>
+              <li><strong>Service Providers:</strong> Trusted third-party vendors (hosting, analytics) bound by confidentiality agreements</li>
+              <li><strong>Legal Requirements:</strong> When required by law, court order, or to protect our rights</li>
+            </ul>
+
+            <h3>Your Rights</h3>
+            <p>Depending on your location, you may have the following rights regarding your personal data:</p>
+            <ul>
+              <li><strong>Access:</strong> Request a copy of personal data we hold about you</li>
+              <li><strong>Rectification:</strong> Request correction of inaccurate personal data</li>
+              <li><strong>Deletion:</strong> Request deletion of your personal data (subject to legal retention requirements)</li>
+              <li><strong>Portability:</strong> Request your data in a structured, commonly used format</li>
+              <li><strong>Opt-out:</strong> Unsubscribe from marketing communications at any time</li>
+            </ul>
+
+            <h3>Cookies and Tracking</h3>
+            <p>We use essential cookies for authentication and session management. Analytics cookies help us understand how visitors interact with our documentation site. You can control cookie preferences through your browser settings.</p>
+
+            <h3>Children's Privacy</h3>
+            <p>Our services are not intended for users under the age of 16. We do not knowingly collect personal information from children. If we become aware of such collection, we will delete the information promptly.</p>
+
+            <h3>Changes to This Policy</h3>
+            <p>We may update this privacy policy periodically. Changes will be posted on this page with an updated "Last updated" date. We encourage you to review this policy regularly. Material changes will be communicated via email to registered users.</p>
+
+            <h3>Contact Us</h3>
+            <p>For questions about this Privacy Policy or to exercise your rights, contact our Privacy Team:</p>
+            <p style="margin-top: 8px;"><a href="mailto:privacy@badlandslabs.io">privacy@badlandslabs.io</a></p>
+          </div>
+        </div>
+
+        <!-- Terms Panel -->
+        <div class="tab-panel" id="terms" role="tabpanel">
+          <div class="section-header">
+            <p class="eyebrow">Legal</p>
+            <h2 class="section-title">Terms of Service</h2>
+            <p class="section-desc">Last updated: May 15, 2026</p>
+          </div>
+
+          <div class="legal-content">
+            <h3>Acceptance of Terms</h3>
+            <p>By accessing or using Badlands Labs services, you agree to be bound by these Terms of Service. If you do not agree to these terms, do not use our services. These terms constitute a legally binding agreement between you and Badlands Labs.</p>
+
+            <h3>Description of Service</h3>
+            <p>Badlands Labs provides an API proxy infrastructure that routes requests to underlying AI service providers including but not limited to OpenAI and Anthropic. Our service acts as an intermediary, providing unified access, rate limiting, analytics, and other infrastructure features.</p>
+
+            <h3>Account Registration</h3>
+            <p>To use Badlands Labs, you must:</p>
+            <ul>
+              <li>Provide accurate, current, and complete information during registration</li>
+              <li>Maintain and update your information to keep it accurate and current</li>
+              <li>Be at least 16 years of age or have parental consent if younger</li>
+              <li>Not register more than one account unless explicitly permitted</li>
+              <li>Be responsible for all activity under your account</li>
+            </ul>
+
+            <h3>API Key Management</h3>
+            <p>Your API key is the sole credential for authenticating requests to our service. You agree to:</p>
+            <ul>
+              <li>Keep your API key confidential and never share it publicly</li>
+              <li>Treat your API key with the same security as a password</li>
+              <li>Immediately revoke and regenerate your key if you suspect compromise</li>
+              <li>Accept all charges incurred through your API key, whether authorized or not</li>
+              <li>Use only the API key format provided (<code>sk-bdl-api03-*</code> prefix)</li>
+            </ul>
+
+            <h3>Acceptable Use Policy</h3>
+            <p>You agrees not to use Badlands Labs to:</p>
+            <ul>
+              <li>Violate any applicable laws, regulations, or third-party rights</li>
+              <li>Generate spam, malware, or content for illegal activities</li>
+              <li>Attempt to circumvent rate limits or exploit system vulnerabilities</li>
+              <li>Resell or redistribute our services without explicit permission</li>
+              <li>Use automated tools to overwhelm or test our infrastructure</li>
+              <li>Interfere with, disrupt, or damage our services or infrastructure</li>
+              <li>Impersonate any person or entity or falsely represent your affiliation</li>
+            </ul>
+
+            <h3>Rate Limits and quotas</h3>
+            <p>Usage is subject to rate limits and quotas as specified in your plan:</p>
+            <ul>
+              <li><strong>Free Tier:</strong> 100 requests/day, 10 requests/minute</li>
+              <li><strong>Pro Tier:</strong> 10,000 requests/day, 100 requests/minute</li>
+              <li><strong>Enterprise:</strong> Custom limits as agreed in contract</li>
+            </ul>
+            <p>Exceeding rate limits may result in temporary request rejection (429 status code). Consistent overages may result in account suspension or plan modification.</p>
+
+            <h3>Payment and Billing</h3>
+            <p>For paid tiers:</p>
+            <ul>
+              <li>Subscription fees are billed monthly in advance</li>
+              <li>Usage overages are billed at the end of each billing cycle</li>
+              <li>All fees are non-refundable unless required by law</li>
+              <li>Failed payments may result in service suspension after 7 days</li>
+              <li>Price changes will be communicated 30 days in advance</li>
+            </ul>
+
+            <h3>Intellectual Property Rights</h3>
+            <p>Badlands Labs retains all rights to our infrastructure, documentation, trademarks, and service marks. You retain all rights to content you submit through our service. By using our service, you grant us a limited license to process your requests as necessary to provide the service.</p>
+
+            <h3>Third-Party Services</h3>
+            <p>Our service relies on underlying AI providers. You acknowledge that:</p>
+            <ul>
+              <li>We are not affiliated with OpenAI or Anthropic (except as a licensee)</li>
+              <li>Third-party service availability is governed by their respective terms</li>
+              <li>We are not responsible for third-party service changes, downtime, or policy changes</li>
+              <li>You must comply with both our terms and the AI provider's terms of service</li>
+            </ul>
+
+            <h3>Disclaimer of Warranties</h3>
+            <p>OUR SERVICES ARE PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED. WE DO NOT WARRANT THAT THE SERVICE WILL BE UNINTERRUPTED, ERROR-FREE, OR COMPLETELY SECURE. WE RECOMMEND USING THE SERVICE IN PRODUCTION ONLY AFTER APPROPRIATE TESTING.</p>
+
+            <h3>Limitation of Liability</h3>
+            <p>TO THE MAXIMUM EXTENT PERMITTED BY LAW, BADLANDS LABS SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED TO LOSS OF PROFITS, DATA, OR USE, REGARDLESS OF THE THEORY OF LIABILITY.</p>
+
+            <h3>Indemnification</h3>
+            <p>You agree to indemnify, defend, and hold harmless Badlands Labs, its officers, directors, and agents from and against any claims, damages, losses, and expenses (including reasonable attorneys' fees) arising from your use of our services, your violation of these terms, or your violation of any third-party rights.</p>
+
+            <h3>Termination</h3>
+            <p>You may terminate your account at any time through the dashboard or by contacting support. We may suspend or terminate accounts that:</p>
+            <ul>
+              <li>Violate these Terms of Service</li>
+              <li>Engage in fraudulent or illegal activity</li>
+              <li>Fail to pay fees when due</li>
+              <li>Pose a security risk to our infrastructure</li>
+            </ul>
+
+            <h3>Modifications to Terms</h3>
+            <p>We reserve the right to modify these terms at any time. Material changes will be communicated via email and posted on our website. Continued use of our services after changes constitutes acceptance of the modified terms.</p>
+
+            <h3>Governing Law</h3>
+            <p>These terms shall be governed by and construed in accordance with applicable law. Any disputes arising from these terms shall be resolved through binding arbitration or in the courts of applicable jurisdiction.</p>
+
+            <h3>Contact Information</h3>
+            <p>For questions about these Terms of Service, contact us:</p>
+            <p style="margin-top: 8px;"><a href="mailto:legal@badlandslabs.io">legal@badlandslabs.io</a></p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="brand-name">Badlands<em>Labs</em></div>
+          <p>Secure API proxy infrastructure</p>
+        </div>
+        <div class="footer-links">
+          <a href="https://github.com/badlandslabs" target="_blank" rel="noopener">GitHub</a>
+          <a href="#status">Status</a>
+          <a href郵件mailto:support@badlandslabs.io">Support</a>
+          <a href="#privacy">Privacy</a>
+          <a href="#terms">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+</body>
+</html>
